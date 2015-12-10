@@ -7,3 +7,9 @@ Send videos, music, photos, and Live TV to Chromecast with ease.
 Emby automatically detects Dlna devices on your network so that you can easily send content, remote control, and more.
 
 https://emby.media/
+
+Start Emby Server
+systemctl start emby-server
+
+Run Setup Wizard
+Visit http://localhost:8096
