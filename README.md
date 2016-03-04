@@ -1,6 +1,7 @@
 # emby-server
 
 OpenSource Alternative to Plex
+![Emby Server](https://raw.githubusercontent.com/dperson/emby/master/logo.png)
 
 Emby Server automatically converts and streams your personal media on the fly to play on any device.
 Send videos, music, photos, and Live TV to Chromecast with ease.
