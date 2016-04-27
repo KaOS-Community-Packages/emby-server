@@ -14,3 +14,5 @@ systemctl start emby-server
 
 Run Setup Wizard
 Visit http://localhost:8096
+
+emby-server dont work well with mono 4.4
