@@ -1,11 +1,11 @@
 pkgname=emby-server
-pkgver=3.0.5985
+pkgver=3.0.5986
 pkgrel=1
 pkgdesc='Bring together your videos, music, photos, and live television'
 arch=('x86_64')
 url='http://emby.media'
 license=('GPL2')
-depends=('ffmpeg' 'imagemagick' 'libmediainfo' 'mono' 'sqlite')
+depends=('ffmpeg' 'imagemagick' 'mediainfolib' 'mono' 'sqlite')
 install='emby-server.install'
 source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrowser/archive/${pkgver}.tar.gz"
         'emby-server'
@@ -13,7 +13,7 @@ source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrow
         'emby-server.conf'
         'emby-server.service')
 backup=('etc/conf.d/emby-server')
-sha256sums=('8bc025dfa35aa9ee23dd9682f19b6a248233afad0aebe55a379c1b7753c6e89a'
+sha256sums=('3df615ff56c7f1d76746d2d38f9933b613674a4aea92e786dda9de34f9f68c51'
             '7b1974f7bba8ac4b76e51ef7fe1257d165c7c4abbd0915e192391336048a3d74'
             'b25bf83a0ab371aff3b13b82f7af71b51bfe6d7e51eb8a8a3dd8f0774ffce6a5'
             'c9ad78f3e2f0ffcb4ee66bb3e99249fcd283dc9fee17895b9265dc733288b953'
