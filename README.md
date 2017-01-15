@@ -9,6 +9,17 @@ Emby automatically detects Dlna devices on your network so that you can easily s
 
 https://emby.media/
 
+
+Before install, you need to install this package from KCP:
+```
+kcp -di referenceassemblies-pcl
+```
+
+Install:
+```
+kcp -i emby-server
+```
+
 Start Emby Server
 systemctl start emby-server
 
