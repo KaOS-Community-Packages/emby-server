@@ -5,7 +5,7 @@ pkgdesc='Bring together your videos, music, photos, and live television'
 arch=('x86_64')
 url='http://emby.media'
 license=('GPL2')
-depends=('ffmpeg' 'imagemagick' 'mediainfolib' 'mono' 'sqlite')
+depends=('ffmpeg' 'imagemagick' 'mediainfolib' 'mono' 'sqlite' 'referenceassemblies-pcl')
 install='emby-server.install'
 source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrowser/archive/${pkgver}.tar.gz"
         'emby-server'
