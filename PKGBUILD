@@ -1,5 +1,5 @@
 pkgname=emby-server
-pkgver=3.2.8
+pkgver=3.2.12
 pkgrel=1
 pkgdesc='Bring together your videos, music, photos, and live television'
 arch=('x86_64')
@@ -13,7 +13,7 @@ source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrow
         'emby-server.conf'
         'emby-server.service')
 backup=('etc/conf.d/emby-server')
-sha256sums=('b3afee84546c3f610f0016af6ad2f5cea1ec3f662d866665753612732efcc58a'
+sha256sums=('f3d37c9a6e992e977853928942e7ea53bddf4cbb878df285dd53f7c36d25313e'
             '7b1974f7bba8ac4b76e51ef7fe1257d165c7c4abbd0915e192391336048a3d74'
             'b25bf83a0ab371aff3b13b82f7af71b51bfe6d7e51eb8a8a3dd8f0774ffce6a5'
             'c9ad78f3e2f0ffcb4ee66bb3e99249fcd283dc9fee17895b9265dc733288b953'
