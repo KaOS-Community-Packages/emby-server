@@ -8,7 +8,7 @@ post_install() {
 post_upgrade() {
   post_install
 
-  echo "Please run systemctl daemon-reload and restart emby-server service"
+  echo "Please run systemctl daemon-reload and systemctl restart emby-server "
 }
 
 post_remove() {
