@@ -1,46 +1,51 @@
-pkgname=heimdall
-pkgver=1.4.1
-pkgrel=2
-pkgdesc='Tool suite used to flash firmware (aka ROMs) onto Samsung mobile devices'
+pkgname=emby-server
+pkgver=3.2.14.0
+pkgrel=1
+pkgdesc='Bring together your videos, music, photos, and live television'
 arch=('x86_64')
-url='http://www.glassechidna.com.au/products/heimdall/'
-license=('MIT')
-depends=('libusb')
-optdepends=('android-udev: Udev rules to connect Android devices to your linux box')
-source=("heimdall-${pkgver}.tar.gz::https://github.com/Benjamin-Dobell/Heimdall/archive/v${pkgver}.tar.gz"
-        )
-md5sums=('22c911e9042f5ed8fd90cbeeb9589015'
-         )
+url='http://emby.media'
+license=('GPL2')
+depends=('ffmpeg' 'imagemagick' 'mediainfolib' 'mono' 'sqlite' 'referenceassemblies-pcl')
+install='emby-server.install'
+source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrowser/archive/${pkgver}.tar.gz"
+        'emby-server'
+        'emby-migrate-database'
+        'emby-server.conf'
+        'emby-server.service')
+backup=('etc/conf.d/emby-server')
+sha256sums=('d21415f342586ccbbb454c1f488c5805a99c4f8a7159f1914c3df9dd8efbad12'
+            '7b1974f7bba8ac4b76e51ef7fe1257d165c7c4abbd0915e192391336048a3d74'
+            'b25bf83a0ab371aff3b13b82f7af71b51bfe6d7e51eb8a8a3dd8f0774ffce6a5'
+            'c9ad78f3e2f0ffcb4ee66bb3e99249fcd283dc9fee17895b9265dc733288b953'
+            '8a91ea49a1699c820c4a180710072cba1d6d5c10e45df97477ff6a898f4e1d70')
+
+prepare() {
+  cd Emby-${pkgver}
+
+  sed 's/libMagickWand-6.Q8.so/libMagickWand-6.Q16HDRI.so/' -i MediaBrowser.Server.Mono/ImageMagickSharp.dll.config
+}
 
 build() {
-  cd Heimdall-$pkgver
+  cd Emby-${pkgver}
 
-  cd libpit/
-  ./configure --prefix=/usr
-  make
-
-  cd ../heimdall/
-  ./configure --prefix=/usr
-  make
-
+  xbuild \
+    /p:Configuration='Release Mono' \
+    /p:Platform='Any CPU' \
+    /p:OutputPath="${srcdir}/build" \
+    /t:build MediaBrowser.Mono.sln
+   mono --aot='full' -O='all' ../build/MediaBrowser.Server.Mono.exe
 }
 
 package() {
+  install -dm 755 "${pkgdir}"/{etc/conf.d,usr/{bin,lib/systemd/system}}
+  cp -dr --no-preserve='ownership' build "${pkgdir}"/usr/lib/emby-server
+  install -m 755 emby-server "${pkgdir}"/usr/bin/
+  install -m 755 emby-migrate-database "${pkgdir}"/usr/bin/
+  install -m 644 emby-server.service "${pkgdir}"/usr/lib/systemd/system/
+  install -m 644 emby-server.conf "${pkgdir}"/etc/conf.d/emby-server
 
-  cd Heimdall-$pkgver
-
-  # Install license file
-  install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-
-  # Install heimdall command line tool
-  cd heimdall/
-
-  # Prevent make install from trying to reload udev
-  # We'll do this the Arch way at package install time
-  mv Makefile Makefile.orig
-  sed -e 's/sudo service udev restart/echo sudo service udev restart/' <Makefile.orig >Makefile
-
-  make DESTDIR="$pkgdir" install
-  rm -rf "$pkgdir/lib/"
-
+  install -dm 755 "${pkgdir}"/var/lib/emby
+  chown 422:422 -R "${pkgdir}"/var/lib/emby
 }
+
+# vim: ts=2 sw=2 et:
