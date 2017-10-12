@@ -1,5 +1,5 @@
 pkgname=emby-server
-pkgver=3.2.26.0
+pkgver=3.2.33.0
 pkgrel=1
 pkgdesc='Bring together your videos, music, photos, and live television'
 arch=('x86_64')
@@ -13,7 +13,7 @@ source=("emby-server-${pkgver}.tar.gz::https://github.com/MediaBrowser/MediaBrow
         'emby-server.conf'
         'emby-server.service')
 backup=('etc/conf.d/emby-server')
-sha256sums=('8d1ee6e5da6589dbdda52df13ffe9ef0a9a5025159e0efcb36334214f3c7246c'
+sha256sums=('655a85d9aa317986f48ff451aa3ba81f0dc0a51818a3f9dab1dddedc2e102910'
             '7b1974f7bba8ac4b76e51ef7fe1257d165c7c4abbd0915e192391336048a3d74'
             'b25bf83a0ab371aff3b13b82f7af71b51bfe6d7e51eb8a8a3dd8f0774ffce6a5'
             'c9ad78f3e2f0ffcb4ee66bb3e99249fcd283dc9fee17895b9265dc733288b953'
@@ -32,7 +32,7 @@ build() {
     /p:Configuration='Release Mono' \
     /p:Platform='Any CPU' \
     /p:OutputPath="${srcdir}/build" \
-    /t:build MediaBrowser.Mono.sln
+    /t:build MediaBrowser.sln
    mono --aot='full' -O='all' ../build/MediaBrowser.Server.Mono.exe
 }
 
